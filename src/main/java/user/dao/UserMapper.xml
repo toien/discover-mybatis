@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user.dao.UserMapper">
+	<select id="selectOne" parameterType="long" resultType="User">
+    <![CDATA[  
+        select * from t_user where id = #{id}
+    ]]>
+	</select>
+	
+	<select id="selectMany" resultType="User">
+    <![CDATA[  
+        select * from t_user where id <= 4
+    ]]>
+	</select>
+
+	<select id="selectSpecialOne" resultType="User">
+    <![CDATA[  
+        select * from t_user where username = #{username} and password = #{password}
+    ]]>
+	</select>
+
+	<select id="selectParts" resultType="map">
+		select id, username,
+		password
+		from t_user
+		where id = #{id}
+	</select>
+
+	<insert id="insertOne" parameterType="User" flushCache="true"
+		statementType="PREPARED" timeout="20">
+	<![CDATA[  
+        insert into t_user (id, username, password)
+ 				values (#{id}, #{username}, #{password})
+    ]]>
+	</insert>
+
+
+</mapper>
